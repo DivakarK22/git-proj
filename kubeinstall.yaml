@@ -1,0 +1,17 @@
+
+
+---
+ - hosts: kubernetes
+   user: root
+   tasks:
+    - name: deploy git-proj on kubernetes
+      shell: |
+        kubectl delete deployment.apps/git-proj
+        git clone 
+        cd /home/master/deployments/git-proj
+        kubectl apply -f deploy.yaml
+        kubectl apply -f service.yaml
+        kubectl scale deployment.apps/git-proj --replicas=0
+        kubectl scale deployment.apps/git-proj --replicas=2
+        cd /home/master/deployments/git-proj
+        kubectl apply -f service.yaml
