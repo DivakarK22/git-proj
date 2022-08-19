@@ -1,0 +1,31 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: git-proj
+  labels:
+     app: git-proj
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: git-proj
+
+  template:
+    metadata:
+      labels:
+        app: git-proj
+    spec:
+      containers:
+      - name: git-proj
+        image: divakar2201/git-proj:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+

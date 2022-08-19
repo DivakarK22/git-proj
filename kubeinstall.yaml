@@ -7,7 +7,8 @@
     - name: deploy git-proj on kubernetes
       shell: |
         kubectl delete deployment.apps/git-proj
-        git clone 
+        cd /home/master/deployments
+        git clone git@github.com:DivakarK22/git-proj.git
         cd /home/master/deployments/git-proj
         kubectl apply -f deploy.yaml
         kubectl apply -f service.yaml
